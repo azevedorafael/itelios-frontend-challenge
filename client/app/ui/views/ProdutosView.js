@@ -1,4 +1,4 @@
-class NegociacoesView {
+class ProdutosView {
 
     constructor(seletor) {
 
