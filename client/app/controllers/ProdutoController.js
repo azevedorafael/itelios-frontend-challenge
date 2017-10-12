@@ -3,7 +3,7 @@ class ProdutoController {
     constructor() {
 
         let $ = document.querySelector.bind(document);
-  
+
     }
 
     adiciona(event) {
@@ -40,4 +40,37 @@ class ProdutoController {
             parseFloat(this._inputValor.value)
         );
     }
+
+    // Estados do AJAX Request:
+    // 0:	requisição	ainda	não	iniciada;
+    // 1:	conexão	com	o	servidor	estabelecida;
+    // 2:	requisição	recebida;
+    // 3:	processando	requisição;
+    // 4:	requisição	está	concluída	e	a	resposta	está	pronta.
+    importaProdutos() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'products.json', 'true');
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    console.log('Obtendo os produtos do servidor.');
+
+                    //realizando o parse para Objeto
+                    var produtos = JSON.parse(xhr.responseText);
+                    console.log(JSON.parse(xhr.responseText));
+                    var node = document.createElement("h2");
+                    var textnode = document.createTextNode("Water");
+                    node.appendChild(textnode);
+                    document.querySelector('body').appendChild(node);
+                }
+                else {
+                    console.log(xhr.responseText);
+                    this._mensagem.texto = 'Não	foi	possível obter os Produtos da	semana';
+                }
+            }
+        };
+        xhr.send();	//	executa	a	requisição	configurada
+        console.log(xhr.responseText);
+    }
 }
+
