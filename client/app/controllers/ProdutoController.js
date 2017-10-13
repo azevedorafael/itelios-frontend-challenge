@@ -5,16 +5,12 @@ class ProdutoController {
         let $ = document.querySelector.bind(document);
 
         this._produtos = new Produtos();
+        this._produtosView = new ProdutosView();
     }
 
     adiciona(event) {
         // cancela a submissão do formulário
         event.preventDefault();
-
-        // let data = new Date(this._inputData.value.split('-'));
-        //mesma soluçõa usando spread operator
-        // let data = converter.paraData(this._inputData.value);
-        // console.log(this._inputData.value);
 
         this._negociacoes.adiciona(this._criaNegociacao());
         this._negociacoesView.update(this._negociacoes);
@@ -68,7 +64,7 @@ class ProdutoController {
                             objeto.imageName,
                             objeto.price,
                             objeto.oldPrice,
-                            objeto.productInfo,
+                            objeto.productInfo.paymentConditions,
                         ));
 
                     //Remove do array o objeto do tipo Produto
@@ -79,7 +75,7 @@ class ProdutoController {
 
                     //Obtém os itens recomendados
                     var recomendacao = produtos.map(objeto => objeto.data.recommendation);
-                    
+
                     //Transforma cada elemento do array de itens recomendados em Produto
                     recomendacao = recomendacao.forEach(element => {
                         var produto = element.map(objeto => new Produto(
@@ -88,10 +84,10 @@ class ProdutoController {
                             objeto.imageName,
                             objeto.price,
                             objeto.oldPrice,
-                            objeto.productInfo,
+                            objeto.productInfo.paymentConditions,
                         ));
-                    
-                    //Adiciona cada Produto no array de Produtos
+
+                        //Adiciona cada Produto no array de Produtos
                         produto.forEach(prod => this._produtos.adiciona(prod));
                     }, this);
 
@@ -101,10 +97,9 @@ class ProdutoController {
                     var widget = produtos.map(objeto => objeto.data.widget);
                     console.log(widget[0].size);
 
-                    var node = document.createElement("h2");
-                    var textnode = document.createTextNode("Water");
-                    node.appendChild(textnode);
-                    document.querySelector('body').appendChild(node);
+                    this._produtosView.recebeArrayProdutos((this._produtos.paraArray()));
+                    this._produtosView.update(widget[0].size);
+
                 }
                 else {
                     console.log(xhr.responseText);

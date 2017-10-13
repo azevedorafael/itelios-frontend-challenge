@@ -1,35 +1,45 @@
 class ProdutosView {
 
-    constructor(seletor) {
+    constructor() {
 
-        this._elemento = document.querySelector(seletor);
+        // this._elemento = document.querySelector(seletor);
+        alert("functiona");
+        this._produtos = [];
     }
 
-    update(model) {
-        this._elemento.innerHTML = this.template(model);
+    recebeArrayProdutos(produtos) {
+        this._produtos = produtos;
     }
 
-    template(model) {
+    update(size) {
+        var main = document.getElementsByTagName("main")[0];
+        main.innerHTML = this.template(size);
+    }
 
+    template(size) {
         return `
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
-                    <th>DATA</th>
-                    <th>QUANTIDADE</th>
-                    <th>VALOR</th>
-                    <th>VOLUME</th>
+                    <th>Business ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Old Price</th>
+                    <th>Image Name</th>
+                    <th>Product Info</th>
                 </tr>
             </thead>
 
             <tbody>
-            ${model.paraArray().map(negociacao =>
+            ${this._produtos.map(produto =>
                 `
                 <tr>
-                    <td>${DateConverter.paraTexto(negociacao.data)}</td>
-                    <td>${negociacao.quantidade}</td>
-                    <td>${negociacao.valor}</td>
-                    <td>${negociacao.volume}</td>
+                    <td>${produto.businessId}</td>
+                    <td>${produto.name}</td>
+                    <td>${produto.price}</td>
+                    <td>${produto.oldPrice}</td>
+                    <td>${produto.imageName}</td>
+                    <td>${produto.productInfo}</td>
                 </tr>
                 `).join('')}
             </tbody>
@@ -37,11 +47,9 @@ class ProdutosView {
             <tfoot>
                 <tr>
                     <td colspan="3"></td>
-                    <td>${model.volumeTotal}</td>
                 </tr>
             </tfoot>
         </table>
         `
-
     }
 }
