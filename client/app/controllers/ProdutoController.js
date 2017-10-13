@@ -4,6 +4,7 @@ class ProdutoController {
 
         let $ = document.querySelector.bind(document);
 
+        this._produtos = new Produtos();
     }
 
     adiciona(event) {
@@ -55,9 +56,51 @@ class ProdutoController {
                 if (xhr.status == 200) {
                     console.log('Obtendo os produtos do servidor.');
 
-                    //realizando o parse para Objeto
+                    //Converte a resposta txt da requisição AJAX em JSON
                     var produtos = JSON.parse(xhr.responseText);
-                    console.log(JSON.parse(xhr.responseText));
+
+                    //Obtém o item pesquisado e transforma em Produto
+                    var produtoPesquisado = produtos.map(objeto => objeto.data.item);
+                    produtoPesquisado = produtoPesquisado
+                        .map(objeto => new Produto(
+                            objeto.businessId,
+                            objeto.name,
+                            objeto.imageName,
+                            objeto.price,
+                            objeto.oldPrice,
+                            objeto.productInfo,
+                        ));
+
+                    //Remove do array o objeto do tipo Produto
+                    produtoPesquisado = produtoPesquisado.reduce((prev, current) => { prev = current; return prev }, {});
+
+                    //Adiciona o Produto pesquisado á lista de Produtos
+                    this._produtos.adiciona(produtoPesquisado);
+
+                    //Obtém os itens recomendados
+                    var recomendacao = produtos.map(objeto => objeto.data.recommendation);
+                    
+                    //Transforma cada elemento do array de itens recomendados em Produto
+                    recomendacao = recomendacao.forEach(element => {
+                        var produto = element.map(objeto => new Produto(
+                            objeto.businessId,
+                            objeto.name,
+                            objeto.imageName,
+                            objeto.price,
+                            objeto.oldPrice,
+                            objeto.productInfo,
+                        ));
+                    
+                    //Adiciona cada Produto no array de Produtos
+                        produto.forEach(prod => this._produtos.adiciona(prod));
+                    }, this);
+
+                    console.log(this._produtos);
+
+                    //Obtém a quantidade de itens recomendados
+                    var widget = produtos.map(objeto => objeto.data.widget);
+                    console.log(widget[0].size);
+
                     var node = document.createElement("h2");
                     var textnode = document.createTextNode("Water");
                     node.appendChild(textnode);
@@ -65,12 +108,11 @@ class ProdutoController {
                 }
                 else {
                     console.log(xhr.responseText);
-                    this._mensagem.texto = 'Não	foi	possível obter os Produtos da	semana';
+                    console.log('Não foi possível obter os Produtos!');
                 }
             }
         };
         xhr.send();	//	executa	a	requisição	configurada
-        console.log(xhr.responseText);
     }
 }
 

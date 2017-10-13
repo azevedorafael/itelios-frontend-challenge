@@ -5,15 +5,20 @@
     <meta charset="UTF-8">
     <title>Prateleira de Produtos</title>
     <link rel="stylesheet" href="">
-
 </head>
 
-<body class="container">
+<body class="container" onload="produtoController.importaProdutos()">
 
     <h1>Prateleira de Produtos</h1>
 
     <!-- <script	src="app/index.js"></script> -->
-    <script src=""></script>
+    <script src="app/domain/Produto.js"></script>
+    <script src="app/domain/Produtos.js"></script>
+    <script src="app/controllers/ProdutoController.js"></script>
+    <script>
+        let produtoController = new ProdutoController();
+    </script>
+    <script src="app/ui/views/ProdutosView.js"></script>
 </body>
 
 </html>
