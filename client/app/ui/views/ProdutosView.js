@@ -3,8 +3,12 @@ class ProdutosView {
     constructor() {
 
         // this._elemento = document.querySelector(seletor);
-        alert("functiona");
         this._produtos = [];
+        let $ = document.querySelector.bind(document);
+        this._header = $('header');
+        this._main = $('main');
+        this._footer = $('footer');
+
     }
 
     recebeArrayProdutos(produtos) {
@@ -12,11 +16,24 @@ class ProdutosView {
     }
 
     update(size) {
-        var main = document.getElementsByTagName("main")[0];
-        main.innerHTML = this.template(size);
+        var h
+        // var main = document.getElementsByTagName("main")[0];
+        this._header.innerHTML = this._headerTemplate();
+        this._main.innerHTML = this._mainTemplate(size);
+        this._footer.innerHTML = this._footerTemplate();
     }
 
-    template(size) {
+    _headerTemplate() {
+        let produtosShort = this._produtos[0].name.split(',');
+        this._produtos.shift();
+        return `
+            Você visitou:
+            ${produtosShort[0]}
+            e talvez se interesse por:
+        `
+    }
+
+    _mainTemplate(size) {
         return `
         <table class="table table-hover table-bordered">
             <thead>
@@ -38,7 +55,7 @@ class ProdutosView {
                     <td>${produto.name}</td>
                     <td>${produto.price}</td>
                     <td>${produto.oldPrice}</td>
-                    <td>${produto.imageName}</td>
+                    <td><img src="${produto.imageName}" alt=""></td>
                     <td>${produto.productInfo}</td>
                 </tr>
                 `).join('')}
@@ -51,5 +68,11 @@ class ProdutosView {
             </tfoot>
         </table>
         `
+    }
+
+    _footerTemplate() {
+        return `
+        <button>adicionar ao carrinho</button>
+            `
     }
 }
