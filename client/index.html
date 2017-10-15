@@ -4,28 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Prateleira de Produtos</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="container" onload="produtoController.importaProdutos()">
 
-    <header>
+    <div class='wrapper'>
+        <header>
 
-    </header>
+        </header>
 
-    <main>
+        <main id="main">
 
-    </main>
+        </main>
 
-    <footer>
+        <footer>
 
-    </footer>
+        </footer>
+    </div>
 
     <!-- JS Dependencies -->
     <script src="app/domain/Produto.js"></script>
     <script src="app/domain/Produtos.js"></script>
     <script src="app/controllers/ProdutoController.js"></script>
+    <script src="js/carousel.js"></script>
     <script src="app/ui/views/ProdutosView.js"></script>
     <script>
         let produtoController = new ProdutoController();

@@ -16,11 +16,11 @@ class ProdutosView {
     }
 
     update(size) {
-        var h
-        // var main = document.getElementsByTagName("main")[0];
         this._header.innerHTML = this._headerTemplate();
         this._main.innerHTML = this._mainTemplate(size);
         this._footer.innerHTML = this._footerTemplate();
+        var  produtos = new Carousel("produtos");
+        produtos.next(2000);
     }
 
     _headerTemplate() {
@@ -34,41 +34,20 @@ class ProdutosView {
     }
 
     _mainTemplate(size) {
-        return `
-        <table class="table table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th>Business ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Old Price</th>
-                    <th>Image Name</th>
-                    <th>Product Info</th>
-                </tr>
-            </thead>
-
-            <tbody>
-            ${this._produtos.map(produto =>
-                `
-                <tr>
-                    <td>${produto.businessId}</td>
-                    <td>${produto.name}</td>
-                    <td>${produto.price}</td>
-                    <td>${produto.oldPrice}</td>
-                    <td><img src="${produto.imageName}" alt=""></td>
-                    <td>${produto.productInfo}</td>
-                </tr>
-                `).join('')}
-            </tbody>
-
-            <tfoot>
-                <tr>
-                    <td colspan="3"></td>
-                </tr>
-            </tfoot>
-        </table>
+         return `
+        <div id="produtos">
+            <div>
+        ${this._produtos.map(produto =>
+               `
+                    <div class="carousel">
+                        <img src="${produto.imageName}">
+                    </div>
+                `)}
+                </div>
+        </div>
         `
     }
+
 
     _footerTemplate() {
         return `
