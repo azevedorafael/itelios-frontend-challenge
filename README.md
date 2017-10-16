@@ -6,34 +6,28 @@ Bem-vindo ao desafio de admissão de front-end da Itelios! O que preparamos para
 
 O objetivo do desafio é simples: Consumir uma json via xhttp e, com o resultado dele, montar um widget de prateleira de cross-sell. Na resposta deste request você receberá uma lista de produtos. Esta lista servirá para montar um pequeno carrossel de produtos. 
 
-## Design
+## Especificação
 
-- A prateleira apresentada deve seguir o [seguinte design](desafio-front-end-itelios.jpg)
-- Baseado neste layout, faça uma adaptação responsiva para celulares.
+- Esse projeto segue o padrão MVC, sem utilização de bibliotecas ou frameworks
+- Utiliza Vanilla JS
+- Para montar o carrossel foi utilizado Vanilla JS, implementado por [Jeremy England](https://gist.github.com/simply-coded/5745cca64d4d7e8707ea002e1290b5b8)
 
-## Como realizar o teste
+## Como executar esse projeto e contribuir
 
-- Faça um fork deste repositório em seu GitHub
-- Adicione ao Readme uma descrição de como executar seu projeto
-- Descreva as funcionalidades do seu desafio, venda seu peixe! Por exemplo, se fez a prateleira com javascript puro, porém utilizou uma biblioteca para o carrossel, deixe isso no Readme. Se usou ES6 com um transpiler, conte isso pra gente. 
-- Não há um limite de tempo, porém consideramos ideal não gastar mais que 8h neste desafio
-- Faça commits parciais, para que possamos acompanhar o seu desenvolvimento.
-- Em caso de dúvidas, entre em contato com flora.braz@itelios.com
+Primeiramente, faça um fork desse repositório.
 
-## Dicas
- 
-- O ícone do botão é o add-shopping-plus, do Material Design. https://material.io/icons/
-- A fontes utilizadas são Roboto Condensed Bold (títulos), Roboto Regular (texto corrido) e Roboto Bold (preço e preço parcelado). 
-- We **<3** Vanilla Javascript. Tente executar este teste usando javascript puro. Só utilize bibliotecas como último recurso.
-- We **<3** CSS responsivo, organizado, modular e feito com pré-processadores. Sinta-se livre para usar a arquitetura CSS que achar mais adequada. 
-- Trabalhamos com clientes perfeccionistas, portanto tenha atenção com espaçamentos, tamanhos e estilos de fonte. 
+Em seguida, clone esse repositório para o seu desktop.
 
-## Critérios de avaliação
+```sh
+$ git clone {YOUR_REPOSITORY_CLONE_URL}
+$ cd itelios-frontend-challenge
+```
 
-- Alcançar os objetivos propostos
-- Qualidade de código
-- Commits parciais, mostrando a linha de desenvolvimento
-- Boa descrição das funcionalidades do desafio
-- Não utilização de bibliotecas ou frameworks
-- Fidelidade ao design proposto
-- Adaptação mobile
+Execute os seguintes comandos para inicar o servidor Node.js localmente:
+
+```sh
+$ cd server
+$ npm start
+```
+
+Abra o seu navegador e acesse o [Link](http://localhost:3000/)
